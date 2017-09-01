@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DatePicker Demo</title>
+    <link rel="stylesheet" href="/src/datepicker.css">
+</head>
+<body>
+    <button onclick="picker.show()">Show</button>
+    <script src="/dist/datepicker.min.js"></script>
+    <script>
+        const picker = new DatePicker({
+            debug: true,
+            minDate: '2015-01-01',
+            maxDate: new Date(), // today
+            startDate: null,
+            endDate: new Date(),
+            multiple: true,
+            locale: {
+                clear: '清空',
+                submit: '确定',
+                to: '至',
+                year: '年',
+                month: '月',
+                day: '日',
+                startDate: '开始日期',
+                endDate: '结束日期'
+            },
+            onDismiss: function() {
+            },
+            onClear: function() {
+                this.setStartDate(null)
+                this.setEndDate(new Date())
+            },
+            onSubmit: function(data) {
+                console.log(data)
+                return true
+            }
+        })
+    </script>
+</body>
+</html>

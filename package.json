@@ -1,0 +1,36 @@
+{
+  "name": "datepicker",
+  "version": "1.0.0",
+  "description": "A date picker library writtern in plain Javascript",
+  "main": "src/index.js",
+  "scripts": {
+    "watch": "./node_modules/.bin/webpack --progress --watch",
+    "start": "./node_modules/.bin/webpack-dev-server --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizhineng/datepicker.git"
+  },
+  "keywords": [
+    "javascript",
+    "datepicker"
+  ],
+  "author": "Li Zhineng <lizhineng@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lizhineng/datepicker/issues"
+  },
+  "homepage": "https://github.com/lizhineng/datepicker#readme",
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-0": "6.24.1",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "2.7.1"
+  },
+  "dependencies": {
+    "deepmerge": "^1.5.1"
+  }
+}
