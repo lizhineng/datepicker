@@ -358,7 +358,7 @@ export default class DatePicker {
         this.el.container.style.display = 'block'
         setTimeout(() => this.el.container.style.transform = 'translateY(0)', 0) 
 
-        document.body.addEventListener('touchmove', e => e.preventDefault())
+        document.body.addEventListener('touchmove', utils.preventDefault)
     }
 
     /**
@@ -370,5 +370,7 @@ export default class DatePicker {
 
         this.el.container.style.transform = 'translateY(100%)'
         setTimeout(() => this.el.container.style.display = 'none', 300) 
+
+        document.body.removeEventListener('touchmove', utils.preventDefault)
     }
 }

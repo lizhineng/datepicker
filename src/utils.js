@@ -129,9 +129,19 @@ function dateFormat(date, format) {
     return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
 }
 
+/**
+ * Prevent default handler
+ *
+ * @return void
+ */
+function preventDefault(e) {
+    e.preventDefault()
+}
+
 module.exports = {
     generateYears,
     generateMonths,
     generateDays,
-    dateFormat
+    dateFormat,
+    preventDefault
 }
