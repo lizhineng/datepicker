@@ -12,6 +12,7 @@ export default class DatePicker {
             maxDate: null,
             startDate: null,
             endDate: null,
+            type: 'date', // the type of the selector {year, month, date}
             multiple: false,
             locale: {
                 clear: 'Clear',
@@ -82,7 +83,7 @@ export default class DatePicker {
                 <div id="datepicker-clear" class="datepicker-clear">${this.options.locale.clear}</div>
                 <div id="datepicker-submit" class="datepicker-submit">${this.options.locale.submit}</div>
             </div>
-            <div class="datepicker-hero">
+            <div id="datepicker-hero" class="datepicker-hero">
                 <div id="datepicker-hero-start" class="datepicker-hero-item datepicker-hero-start">
                     ${this.options.startDate ? startDate : this.options.locale.startDate}
                 </div>
@@ -129,6 +130,7 @@ export default class DatePicker {
         // store the elements
         this.el.clear = document.getElementById('datepicker-clear')
         this.el.submit = document.getElementById('datepicker-submit')
+        this.el.hero = document.getElementById('datepicker-hero')
         this.el.start = document.getElementById('datepicker-hero-start')
         this.el.end = document.getElementById('datepicker-hero-end')
         this.el.year = document.getElementById('datepicker-year')
@@ -372,5 +374,54 @@ export default class DatePicker {
         setTimeout(() => this.el.container.style.display = 'none', 300) 
 
         document.body.removeEventListener('touchmove', utils.preventDefault)
+    }
+
+    /**
+     * Set type for the date picker
+     *
+     * @param type string Selector type: {year, month, date}
+     * @return object
+     */
+    setType(type) {
+        this.options.type = type
+
+        // update the dom we actually use
+        switch (type) {
+            case 'year':
+                this.el.year.style.display = 'block'
+                this.el.month.style.display = 'none'
+                this.el.day.style.display = 'none'
+                break
+            case 'month':
+                this.el.year.style.display = 'block'
+                this.el.month.style.display = 'block'
+                this.el.day.style.display = 'none'
+                break
+            case 'date':
+                this.el.year.style.display = 'block'
+                this.el.month.style.display = 'block'
+                this.el.day.style.display = 'block'
+                break
+        }
+
+        return this
+    }
+
+    /**
+     * Set multiple option
+     *
+     * @param flag boolean
+     * @return object
+     */
+    setMultiple(flag) {
+        this.options.multiple = !!flag
+
+        // display hero section if it's set to multiple option
+        if (this.options.multiple) {
+            this.el.hero.style.display = 'block'
+        } else {
+            this._switchType('start')
+            this.el.hero.style.display = 'none'
+        }
     }
 }
