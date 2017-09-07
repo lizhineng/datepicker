@@ -158,8 +158,14 @@ export default class DatePicker {
         if (this.options.onSubmit) {
             const {startDate, endDate} = this.options
 
+            // generate payload data for returning
+            const payload = {startDate}
+
+            // append end date if it's multiple option
+            if (this.options.multiple) payload.endDate = endDate
+
             // hide the picker if submit callback if return true
-            this.options.onSubmit.call(this, {startDate, endDate}) && this.hide()
+            this.options.onSubmit.call(this, payload) && this.hide()
         }
     }
 
@@ -292,6 +298,9 @@ export default class DatePicker {
      * Update hero title after wheels' change
      */
     _updateHeroTitle() {
+        // no need to update title if in single selector
+        if (!this.options.multiple) return
+
         const year = this.wheels.year.getValue()
         const month = this.wheels.month.getValue()
         const day = this.wheels.day.getValue()
@@ -305,7 +314,13 @@ export default class DatePicker {
             return
         }
 
-        title.innerText = year.text + month.text + day.text
+        // update title according to the selector type
+        if (this.options.type == 'year')
+            title.innerText = year.text
+        else if (this.options.type == 'month')
+            title.innerText = year.text + month.text
+        else
+            title.innerText = year.text + month.text + day.text
     }
 
     /**
@@ -418,7 +433,7 @@ export default class DatePicker {
 
         // display hero section if it's set to multiple option
         if (this.options.multiple) {
-            this.el.hero.style.display = 'block'
+            this.el.hero.style.display = 'flex'
         } else {
             this._switchType('start')
             this.el.hero.style.display = 'none'
